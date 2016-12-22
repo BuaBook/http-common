@@ -22,6 +22,7 @@ import com.google.api.client.http.HttpResponse;
 import com.google.api.client.http.HttpResponseException;
 import com.google.api.client.http.UrlEncodedContent;
 import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
 import com.google.common.net.MediaType;
 
@@ -81,20 +82,25 @@ public class HttpClient {
 		if(Strings.isNullOrEmpty(url))
 			throw new IllegalArgumentException("No URL specified");
 		
+		log.debug("Attempting HTTP GET [ URL: " + url + " ]");
+		
 		GenericUrl target = new GenericUrl(url);
 		
 		HttpResponse response = null;
+		Stopwatch timer = Stopwatch.createStarted();
 		
 		try {
 			HttpRequest request = requestFactory.buildGetRequest(target);
 			response = request.execute();
 		} catch(HttpResponseException e) {
-			log.error("HTTP client GET failed due to bad HTTP status code [ Status Code: " + e.getStatusCode() + " ]");
+			log.error("HTTP client GET failed due to bad HTTP status code [ URL: " + url + " ] [ Status Code: " + e.getStatusCode() + " ] [ In Flight: " + timer.stop() + " ]");
 			throw new HttpClientRequestFailedException(e);
 		} catch (IOException e) {
-			log.error("HTTP client GET failed [ URL: " + url + " ]. Error - " + e.getMessage(), e);
+			log.error("HTTP client GET failed [ URL: " + url + " ] [ In Flight: " + timer.stop() + " ]. Error - " + e.getMessage(), e);
 			throw new HttpClientRequestFailedException(e);
 		}
+		
+		log.debug("HTTP GET successful [ URL: " + url + " ] [ In Flight: " + timer.stop() + " ]");
 		
 		return response;
 	}
@@ -163,9 +169,12 @@ public class HttpClient {
 		if(content == null)
 			throw new IllegalArgumentException("Content cannot be null");
 		
+		log.debug("Attempting HTTP POST [ URL: " + url + " ] [ Content-Type: " + content.getType() + " ] [ Custom Headers: " + ((headers == null) ? 0 : headers.size()) + " ]");
+		
 		GenericUrl target = new GenericUrl(url);
 		
 		HttpResponse response = null;
+		Stopwatch timer = Stopwatch.createStarted();
 		
 		try {
 			HttpRequest request = requestFactory.buildPostRequest(target, content);
@@ -175,12 +184,14 @@ public class HttpClient {
 			
 			response = request.execute();
 		} catch (HttpResponseException e) { 
-			log.error("HTTP client POST failed due to bad HTTP status code [ Status Code: " + e.getStatusCode() + " ]");
+			log.error("HTTP client POST failed due to bad HTTP status code [ URL: " + url + " ] [ Status Code: " + e.getStatusCode() + " ] [ In Flight: " + timer.stop() + " ]");
 			throw new HttpClientRequestFailedException(e);
 		} catch (IOException e) {
-			log.error("HTTP client POST failed [ URL: " + url + " ]. Error - " + e.getMessage(), e);
+			log.error("HTTP client POST failed [ URL: " + url + " ] [ In Flight: " + timer.stop() + " ]. Error - " + e.getMessage(), e);
 			throw new HttpClientRequestFailedException(e);
 		}
+		
+		log.debug("HTTP POST successful [ URL: " + url + " ] [ In Flight: " + timer.stop() + " ]");
 		
 		return response;
 	}
@@ -192,20 +203,25 @@ public class HttpClient {
 		if(content == null)
 			throw new IllegalArgumentException("Content cannot be null");
 		
+		log.debug("Attempting HTTP PUT [ URL: " + url + " ] [ Content-Type: " + content.getType() + " ]");
+		
 		GenericUrl target = new GenericUrl(url);
 		
 		HttpResponse response = null;
+		Stopwatch timer = Stopwatch.createStarted();
 		
 		try {
 			HttpRequest request = requestFactory.buildPutRequest(target, content);
 			response = request.execute();
 		} catch (HttpResponseException e) {
-			log.error("HTTP client POST failed due to bad HTTP status code [ Status Code: " + e.getStatusCode() + " ]");
+			log.error("HTTP client PUT failed due to bad HTTP status code [ URL: " + url + " ] [ Status Code: " + e.getStatusCode() + " ] [ In Flight: " + timer.stop() + " ]");
 			throw new HttpClientRequestFailedException(e);
 		} catch (IOException e) {
-			log.error("HTTP client POST failed [ URL: " + url + " ]. Error - " + e.getMessage(), e);
+			log.error("HTTP client PUT failed [ URL: " + url + " ] [ In Flight: " + timer.stop() + "]. Error - " + e.getMessage(), e);
 			throw new HttpClientRequestFailedException(e);
 		}
+		
+		log.debug("HTTP PUT successful [ URL: " + url + " ] [ In Flight: " + timer.stop() + " ]");
 		
 		return response;
 	}
