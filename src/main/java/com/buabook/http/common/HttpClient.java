@@ -23,6 +23,7 @@ import com.google.api.client.http.HttpResponseException;
 import com.google.api.client.http.UrlEncodedContent;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.common.base.Strings;
+import com.google.common.net.MediaType;
 
 /**
  * <h3>HTTP Client Access Library</h3>
@@ -106,7 +107,8 @@ public class HttpClient {
 	 * @param url
 	 * @param map
 	 * @return
-	 * @throws HttpClientRequestFailedException
+	 * @throws HttpClientRequestFailedException If the POST returns any HTTP error code or the request fails due to an {@link IOException}
+	 * @see #doPost(String, HttpContent, HttpHeaders)
 	 * @see #getResponseAsString(HttpResponse)
 	 * @see #getResponseAsJson(HttpResponse)
 	 */
@@ -116,21 +118,6 @@ public class HttpClient {
 	}
 	
 	/**
-	 * 
-	 * @param url
-	 * @param contentType
-	 * @param postContent
-	 * @return
-	 * @throws HttpClientRequestFailedException
-	 * @see #getResponseAsString(HttpResponse)
-	 * @see #getResponseAsJson(HttpResponse)
-	 */
-	public HttpResponse doPost(String url, String contentType, String postContent) throws HttpClientRequestFailedException {
-		return doPost(url, contentType, postContent, null);
-	}
-	
-	
-	/**
 	 * <p><b>NOTE</b>: You must call {@link HttpResponse#disconnect()} after using the
 	 * response. {@link #getResponseAsString(HttpResponse)} and {@link #getResponseAsJson(HttpResponse)} will do this for you when
 	 * used.</p>
@@ -138,20 +125,21 @@ public class HttpClient {
 	 * "text/plain" will be used
 	 * @param postContent The content to POST. Pass <code>null</code> or empty string to send no content
 	 * @param headers Any custom headers that need to be set. Pass <code>null</code> if not required
+	 * @throws HttpClientRequestFailedException If the GET returns any HTTP error code or the request fails due to an {@link IOException}
 	 * @see #doPost(String, HttpContent, HttpHeaders)
 	 * @see #getResponseAsString(HttpResponse)
 	 * @see #getResponseAsJson(HttpResponse)
 	 */
-	public HttpResponse doPost(String url, String contentType, String postContent, HttpHeaders headers) throws HttpClientRequestFailedException {
+	public HttpResponse doPost(String url, MediaType contentType, String postContent, HttpHeaders headers) throws HttpClientRequestFailedException {
 		HttpContent content = null;
 		
-		if(Strings.isNullOrEmpty(contentType))
-			contentType = "text/plain";
+		if(contentType == null)
+			contentType = MediaType.PLAIN_TEXT_UTF_8;
 		
 		if(Strings.isNullOrEmpty(postContent))
 			content = new EmptyContent();
 		else
-			content = ByteArrayContent.fromString(contentType, postContent);
+			content = ByteArrayContent.fromString(contentType.toString(), postContent);
 		
 		return doPost(url, content, headers);
 	}
