@@ -1,4 +1,4 @@
-# HTTP Access and JSON Serialisation Support
+# HTTP Access and JSON Serialisation Library
 
 This library provides the following features:
 
@@ -16,6 +16,9 @@ This library provides the following features:
 
 * Oauth
     * Decoder for unencrypted JWT ID tokens
+
+* Standard JSON Response POJOs
+    * Provide standardised JSON responses for all BuaBook APIs
 
 
 ## HTTP Access
@@ -81,5 +84,9 @@ public class WebServiceResourceConfig extends ResourceConfig {
 ```
 
 ## Oauth
+
+--
+
+## Response POJOs
 
 --
