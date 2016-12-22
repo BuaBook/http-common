@@ -14,7 +14,7 @@ This library provides the following features:
 * Jackson
     * Serialisation support for `org.json.JSONObject`
 
-* Oauth
+* OAuth
     * Decoder for unencrypted JWT ID tokens
 
 * Standard JSON Response POJOs
@@ -83,7 +83,7 @@ public class WebServiceResourceConfig extends ResourceConfig {
 }
 ```
 
-## Oauth
+## OAuth
 
 --
 
