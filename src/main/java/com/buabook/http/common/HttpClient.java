@@ -92,7 +92,7 @@ public class HttpClient {
 		try {
 			HttpRequest request = requestFactory.buildGetRequest(target);
 			response = request.execute();
-		} catch(HttpResponseException e) {
+		} catch (HttpResponseException e) {
 			log.error("HTTP client GET failed due to bad HTTP status code [ URL: " + url + " ] [ Status Code: " + e.getStatusCode() + " ] [ In Flight: " + timer.stop() + " ]");
 			throw new HttpClientRequestFailedException(e);
 		} catch (IOException e) {
