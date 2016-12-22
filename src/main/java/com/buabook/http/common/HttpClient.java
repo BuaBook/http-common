@@ -26,7 +26,7 @@ import com.google.common.base.Strings;
 
 /**
  * <h3>HTTP Client Access Library</h3>
- * <br/><br/>(c) 2015 Sport Trades Ltd
+ * (c) 2015 Sport Trades Ltd
  * 
  * @author Jas Rajasansir
  * @version 1.0.0
@@ -138,7 +138,7 @@ public class HttpClient {
 	 * "text/plain" will be used
 	 * @param postContent The content to POST. Pass <code>null</code> or empty string to send no content
 	 * @param headers Any custom headers that need to be set. Pass <code>null</code> if not required
-	 * @see #doPost(String, HttpContent)
+	 * @see #doPost(String, HttpContent, HttpHeaders)
 	 * @see #getResponseAsString(HttpResponse)
 	 * @see #getResponseAsJson(HttpResponse)
 	 */

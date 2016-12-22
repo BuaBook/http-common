@@ -10,7 +10,7 @@ import com.google.common.io.BaseEncoding;
 
 /**
  * <h3>JWT ID Token Decoder</h3>
- * <br/><br/>(c) 2016 Sport Trades Ltd
+ * (c) 2016 Sport Trades Ltd
  * 
  * @author Jas Rajasansir
  * @version 1.0.0

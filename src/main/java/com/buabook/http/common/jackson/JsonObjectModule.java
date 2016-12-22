@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 
 /**
  * <h3>Jackson {@link Module} for {@link JSONObject} Serialisation</h3>
- * <br/><br/>(c) 2016 Sport Trades Ltd
+ * (c) 2016 Sport Trades Ltd
  * 
  * @author Jas Rajasansir
  * @version 1.0.0
