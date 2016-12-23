@@ -43,5 +43,4 @@ public final class JwtIdTokenDecoder {
 		return new JSONObject(new String(decoded));
 	}
 
-	private JwtIdTokenDecoder() {} 
 }

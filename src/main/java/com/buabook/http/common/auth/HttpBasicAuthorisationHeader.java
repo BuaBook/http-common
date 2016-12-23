@@ -24,8 +24,14 @@ public class HttpBasicAuthorisationHeader {
 		return password;
 	}
 	
+	/** Note that this function will only print the length of the password supplied, not the actual password. */
 	@Override
 	public String toString() {
+		return "HttpBasicAuthenticationHeader [username=" + username + ", password=(Length) " + password.length() + "]";
+	}
+	
+	/** @return Similar to {@link #toString()} but also <i>includes</i> the password in plain-text. */
+	public String toStringWithPassword() {
 		return "HttpBasicAuthenticationHeader [username=" + username + ", password=" + password + "]";
 	}
 	

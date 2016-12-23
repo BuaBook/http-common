@@ -27,6 +27,10 @@ public class ResponsePojosTest {
 		assertThat(new EmptyFailureResponse().asResponse().getStatus(), is(equalTo(500)));
 	}
 	
+	public void testEmptyFailureResponseReturnsStatus500WithNullArgument() {
+		assertThat(new EmptyFailureResponse().asResponse(null).getStatus(), is(equalTo(500)));
+	}
+	
 	@Test
 	public void testEmptyFailureResponseReturnsSpecifiedStatus() {
 		assertThat(new EmptyFailureResponse().asResponse(Status.FORBIDDEN).getStatus(), is(equalTo(403)));
