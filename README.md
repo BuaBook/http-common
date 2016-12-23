@@ -25,7 +25,28 @@ This library provides the following features:
 
 ## HTTP Access
 
---
+`HttpClient` and `HttpHelpers` provides the ability to perform HTTP requests building on Google's HTTP client.
+
+### `HttpClient`
+
+Provides GET, POST and PUT functionality (see JavaDoc for full details).
+
+Basic and Bearer authentication are supported:
+
+* Basic authentication with `new HttpClient(String, String)`
+* Bearer authentication with `new HttpClient(String)`
+
+HTTP responses can be converted to String (`HttpClient.getResponseAsString`) or JSON (`HttpClient.getResponseAsJson`).
+
+A single `HttpClient` can be instantiated for the entire application as a new request is generated each time `doGet`, `doPost` or `doPut` are called.
+
+### `ApacheHttpClient`
+
+This behaves the same as `HttpClient` but uses Apache's HTTP connection libraries instead of the standard `java.net` libraries.
+
+### `HttpHelpers`
+
+The function `HttpHelpers.appendUrlParameters(String, Map<String, Object>)` will take the map of parameters and append them to the end of the specified URL in query parameter form (e.g. ?param1=value). Useful for HTTP GET API calls.
 
 ## Jersey Server Features
 
@@ -87,8 +108,15 @@ public class WebServiceResourceConfig extends ResourceConfig {
 
 ## OAuth
 
---
+`JwtIdTokenDecoder.decodeIdToken` will decode an *unencrypted* JWT ID token and return it in JSON form. We use this to decode ID tokens from Microsoft's Azure Active Directory.
 
 ## Response POJOs
 
---
+These POJOs are used to return a standardised JSON interface to clients. They ensure that the JSON returned to clients always take the following form:
+
+```javascript
+{
+    "success": Boolean,
+    "response": Object
+}
+```
