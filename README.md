@@ -20,6 +20,7 @@ This library provides the following features:
 * Standard JSON Response POJOs
     * Provide standardised JSON responses for all BuaBook APIs
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.buabook/http-common/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.buabook/http-common)
 [![Build Status](https://travis-ci.org/BuaBook/http-common.svg?branch=master)](https://travis-ci.org/BuaBook/http-common)
 [![Coverage Status](https://coveralls.io/repos/github/BuaBook/http-common/badge.svg?branch=master)](https://coveralls.io/github/BuaBook/http-common?branch=master)
 
