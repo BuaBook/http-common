@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  *  <li>DEBUG: Query parameters</li>
  *  <li>TRACE: Request headers</li>
  * </ul>
- * <br/><br/>(c) 2017 Sport Trades Ltd
+ * (c) 2017 Sport Trades Ltd
  * 
  * @author Jas Rajasansir
  * @version 1.0.0
