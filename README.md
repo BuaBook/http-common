@@ -64,6 +64,20 @@ public class WebServiceResourceConfig extends ResourceConfig {
 }
 ```
 
+### URL Logger
+
+The `UrlPrinterFilter` class provides logging when any URL within the Jersey application is queried. This can be registered in a Jersey `ResourceConfig` and logs the following information:
+
+* `INFO`: HTTP method, full URL path, content-length and content-type
+* `DEBUG`: Query parameters
+* `TRACE`: Request headers
+
+Example log output:
+
+```
+2017.02.23 15:42:03.597 +0000 INFO  [qtp1005849716-31] com.buabook.http.common.jersey.UrlPrinterFilter : HTTP HEAD: http://127.0.0.1:8090/api/status
+```
+
 ### Constraint Exception Logger
 
 `ConstraintViolationExceptionConverter.asValidationErrors` provides a way to log any validation errors that occur whilst parsing an inbound API request parameters. 
