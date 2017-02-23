@@ -9,6 +9,7 @@ This library provides the following features:
 
 * Jersey Server
     * Serialisation support for `org.json.JSONObject`
+    * URL information logging
     * Constraint validation error logging
 
 * Jackson
@@ -19,6 +20,8 @@ This library provides the following features:
 
 * Standard JSON Response POJOs
     * Provide standardised JSON responses for all BuaBook APIs
+
+Note that this library marks the Jersey and Jackson dependencies for the features above as `provided` only. Therefore you need to include the dependencies in your application for them to work.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.buabook/http-common/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.buabook/http-common)
 [![Build Status](https://travis-ci.org/BuaBook/http-common.svg?branch=master)](https://travis-ci.org/BuaBook/http-common)
