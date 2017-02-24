@@ -8,6 +8,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.UriInfo;
 
@@ -17,25 +18,27 @@ import org.junit.Test;
 import com.buabook.http.common.jersey.UrlPrinterFilter;
 
 public class UrlPrinterFilterTest {
-	private UriInfo uriInfo;
 	
 	private ContainerRequestContext crc;
-	
+
 	@Before
 	public void initialise() throws URISyntaxException {
-		this.uriInfo = mock(UriInfo.class);
+		UriInfo uriInfo = mock(UriInfo.class);
 		when(uriInfo.getAbsolutePath()).thenReturn(new URI("http://test.url.com/with/path"));
 		when(uriInfo.getQueryParameters()).thenReturn(testQueryParams());
 		
 		this.crc = mock(ContainerRequestContext.class);
 		when(crc.getUriInfo()).thenReturn(uriInfo);
+		when(crc.getMediaType()).thenReturn(MediaType.APPLICATION_JSON_TYPE);
 		when(crc.getHeaders()).thenReturn(testHeaders());
 	}
 
+	
 	@Test
 	public void testFilterLogsWithNoError() throws IOException {
 		new UrlPrinterFilter().filter(crc);
 	}
+	
 	
 	private MultivaluedHashMap<String, String> testQueryParams() {
 		MultivaluedHashMap<String, String> params = new MultivaluedHashMap<>();
