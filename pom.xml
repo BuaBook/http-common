@@ -4,15 +4,15 @@
 	<groupId>com.buabook</groupId>
 	<artifactId>http-common</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 
 	<name>BuaBook HTTP Common Library</name>
-	<description>HTTP access functionality (c) 2016 Sport Trades Ltd</description>
+	<description>HTTP access functionality (c) 2016 - 2017 Sport Trades Ltd</description>
 	
 	<url>http://buabook.github.io</url>
 	<licenses>
 		<license>
-    		<name>GPLv3</name>
+    		<name>Apache-2.0</name>
     		<url>https://raw.githubusercontent.com/BuaBook/http-common/master/LICENSE</url>
   		</license>
 	</licenses>
